@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raykne Pereira - Web Designer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        /* --- FUNDO GERAL (Tela do PC) --- */
+        body {
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at center, #222 0%, #000 100%);
+            padding: 20px 0;
+        }
+
+        /* --- O "CELULAR" (Container Principal) --- */
+        .mobile-wrapper {
+            width: 100%;
+            max-width: 400px;
+            background-color: #000;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            /* Padding removido aqui para a imagem tocar as bordas */
+            padding: 0; 
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            overflow: hidden; /* Importante para bordas arredondadas no PC */
+        }
+
+        @media (min-width: 450px) {
+            .mobile-wrapper {
+                min-height: auto;
+                height: auto;
+                border-radius: 40px;
+                border: 8px solid #1a1a1a;
+            }
+        }
+
+        /* --- NOVO HEADER ESTILO HERO (Referência) --- */
+        .hero-header {
+            position: relative;
+            width: 100%;
+            height: 380px; /* Altura da área da imagem */
+            overflow: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cobre toda a área sem distorcer */
+            object-position: center top; /* Foca no rosto */
+        }
+
+        /* O gradiente escuro sobre a imagem para ler o texto */
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            /* Gradiente transparente para preto */
+            background: linear-gradient(to top, rgba(0,0,0,1) 10%, rgba(0,0,0,0.5) 60%, transparent 100%);
+            padding: 30px 25px; /* Espaçamento interno do conteúdo */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Alinha tudo à esquerda */
+            text-align: left;
+        }
+
+        h1 { font-size: 2rem; font-weight: 700; color: white; margin-bottom: 5px; line-height: 1.2; }
+        h2 { font-size: 1rem; font-weight: 400; color: #ccc; margin-bottom: 20px; }
+
+        /* --- AÇÕES RÁPIDAS (Dentro do Header agora) --- */
+        .quick-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .circle-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15); /* Um pouco mais claro sobre fundo escuro */
+            backdrop-filter: blur(5px);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .circle-btn:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
+
+        /* --- CONTAINER DO CORPO (Links e Imagens) --- */
+        /* Novo container para dar espaçamento nas laterais abaixo do header */
+        .content-body {
+            padding: 30px 20px 40px 20px;
+            width: 100%;
+        }
+
+        /* --- LISTA DE LINKS --- */
+        .links-area { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+
+        .card-link {
+            background: white;
+            color: black;
+            padding: 15px;
+            border-radius: 18px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+
+        .card-link:hover { transform: scale(1.02); }
+
+        .card-left { display: flex; align-items: center; gap: 15px; }
+        .icon-box { font-size: 1.8rem; width: 30px; text-align: center; }
+        
+        .fa-behance { color: #1769ff; }
+        .fa-instagram { color: #1769ff; }
+        .fa-linkedin { color: #1769ff; }
+        .fa-whatsapp { color: #1769ff; }
+
+        .text-group { display: flex; flex-direction: column; }
+        .main-text { font-weight: 700; font-size: 0.95rem; }
+        .sub-text { font-size: 0.75rem; color: #555; }
+
+        /* --- SEÇÃO DE IMAGENS --- */
+        .portfolio-section { width: 100%; margin-top: 35px; }
+        .section-title { color: white; font-size: 1rem; margin-bottom: 15px; font-weight: 600; text-align: left; }
+        .image-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .grid-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; transition: all 0.3s ease; cursor: pointer; background: #222; }
+        .grid-img:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+    </style>
+</head>
+<body>
+
+    <div class="mobile-wrapper">
+        
+        <header class="hero-header">
+            <img src="https://i.imgur.com/mIq2zVF.jpg" alt="Raykne" class="hero-img" onerror="this.src='https://via.placeholder.com/400x400/333/fff?text=Foto+Hero'">
+            
+            <div class="hero-overlay">
+                <h1>Raykne Pereira</h1>
+                <h2>Web Designer</h2>
+                
+                <div class="quick-actions">
+                    <a href="#" class="circle-btn"><i class="fa-solid fa-phone"></i></a>
+                    <a href="#" class="circle-btn"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="#" class="circle-btn"><i class="fa-solid fa-share-nodes"></i></a>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-body">
+            
+            <div class="links-area">
+                <a href="#" class="card-link">
+                    <div class="card-left">
+                        <i class="fa-brands fa-behance icon-box"></i>
+                        <div class="text-group">
+                            <span class="main-text">Portfólio</span>
+                            <span class="sub-text">Meus projetos de design</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color:#ccc"></i>
+                </a>
+
+                <a href="#" class="card-link">
+                    <div class="card-left">
+                        <i class="fa-brands fa-instagram icon-box"></i>
+                        <div class="text-group">
+                            <span class="main-text">Instagram</span>
+                            <span class="sub-text">@raykne.3d</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color:#ccc"></i>
+                </a>
+
+                <a href="#" class="card-link">
+                    <div class="card-left">
+                        <i class="fa-brands fa-linkedin icon-box"></i>
+                        <div class="text-group">
+                            <span class="main-text">LinkedIn</span>
+                            <span class="sub-text">Histórico Profissional</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color:#ccc"></i>
+                </a>
+
+                <a href="#" class="card-link">
+                    <div class="card-left">
+                        <i class="fa-brands fa-whatsapp icon-box"></i>
+                        <div class="text-group">
+                            <span class="main-text">WhatsApp</span>
+                            <span class="sub-text">Solicite um orçamento</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color:#ccc"></i>
+                </a>
+            </div>
+
+            <div class="portfolio-section">
+                <h3 class="section-title">Destaques</h3>
+                <div class="image-grid">
+                    <img src="https://picsum.photos/200/200?random=1" alt="Projeto 1" class="grid-img">
+                    <img src="https://picsum.photos/200/200?random=2" alt="Projeto 2" class="grid-img">
+                    <img src="https://picsum.photos/200/200?random=3" alt="Projeto 3" class="grid-img">
+                    <img src="https://picsum.photos/200/200?random=4" alt="Projeto 4" class="grid-img">
+                    <img src="https://picsum.photos/200/200?random=5" alt="Projeto 5" class="grid-img">
+                    <img src="https://picsum.photos/200/200?random=6" alt="Projeto 6" class="grid-img">
+                </div>
+            </div>
+
+        </div> </div>
+
+</body>
+</html>
