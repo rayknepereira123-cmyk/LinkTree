@@ -11,7 +11,7 @@
         /* --- RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
-        /* --- FUNDO GERAL (Tela do PC) --- */
+        /* --- FUNDO GERAL (Visualização no PC) --- */
         body {
             background-color: #111;
             display: flex;
@@ -31,55 +31,68 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            /* Padding removido aqui para a imagem tocar as bordas */
             padding: 0; 
             box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            overflow: hidden; /* Importante para bordas arredondadas no PC */
+            overflow: hidden;
         }
 
-        @media (min-width: 450px) {
+        /* --- AJUSTE CRÍTICO PARA CELULAR (Remove a linha preta) --- */
+        @media (max-width: 450px) {
+            body {
+                padding: 0; /* Remove o espaço ao redor */
+                align-items: flex-start; /* Garante que comece do topo */
+            }
             .mobile-wrapper {
-                min-height: auto;
+                min-height: 100vh;
+                border-radius: 0; /* Remove bordas arredondadas no mobile */
+                box-shadow: none;
+            }
+        }
+
+        /* Visualização estilo celular apenas no PC */
+        @media (min-width: 451px) {
+            .mobile-wrapper {
                 height: auto;
                 border-radius: 40px;
                 border: 8px solid #1a1a1a;
             }
         }
 
-        /* --- NOVO HEADER ESTILO HERO (Referência) --- */
+        /* --- HEADER --- */
         .hero-header {
             position: relative;
             width: 100%;
-            height: 380px; /* Altura da área da imagem */
+            height: 380px; 
             overflow: hidden;
         }
 
         .hero-img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Cobre toda a área sem distorcer */
-            object-position: center top; /* Foca no rosto */
+            object-fit: cover;
+            /* AJUSTE DA POSIÇÃO DA FOTO: 
+               Mudei de 'center top' para 'center 25%'. 
+               Isso sobe a imagem para focar mais no rosto. */
+            object-position: center 25%; 
         }
 
-        /* O gradiente escuro sobre a imagem para ler o texto */
         .hero-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            /* Gradiente transparente para preto */
-            background: linear-gradient(to top, rgba(0,0,0,1) 10%, rgba(0,0,0,0.5) 60%, transparent 100%);
-            padding: 30px 25px; /* Espaçamento interno do conteúdo */
+            background: linear-gradient(to top, rgba(0,0,0,1) 15%, rgba(0,0,0,0.6) 60%, transparent 100%);
+            padding: 30px 25px;
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Alinha tudo à esquerda */
+            align-items: flex-start;
             text-align: left;
         }
 
         h1 { font-size: 2rem; font-weight: 700; color: white; margin-bottom: 5px; line-height: 1.2; }
         h2 { font-size: 1rem; font-weight: 400; color: #ccc; margin-bottom: 20px; }
 
-        /* --- AÇÕES RÁPIDAS (Dentro do Header agora) --- */
+        /* --- AÇÕES RÁPIDAS --- */
         .quick-actions {
             display: flex;
             gap: 12px;
@@ -89,7 +102,7 @@
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.15); /* Um pouco mais claro sobre fundo escuro */
+            background: rgba(255,255,255,0.15);
             backdrop-filter: blur(5px);
             color: white;
             display: flex;
@@ -99,18 +112,18 @@
             transition: 0.3s;
             font-size: 1.1rem;
             border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer; /* Importante para o botão de share */
         }
 
         .circle-btn:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
 
-        /* --- CONTAINER DO CORPO (Links e Imagens) --- */
-        /* Novo container para dar espaçamento nas laterais abaixo do header */
+        /* --- CORPO --- */
         .content-body {
-            padding: 30px 20px 40px 20px;
+            padding: 20px 20px 40px 20px;
             width: 100%;
         }
 
-        /* --- LISTA DE LINKS --- */
+        /* --- LINKS --- */
         .links-area { width: 100%; display: flex; flex-direction: column; gap: 12px; }
 
         .card-link {
@@ -131,15 +144,15 @@
         .icon-box { font-size: 1.8rem; width: 30px; text-align: center; }
         
         .fa-behance { color: #1769ff; }
-        .fa-instagram { color: #1769ff; }
-        .fa-linkedin { color: #1769ff; }
-        .fa-whatsapp { color: #1769ff; }
+        .fa-instagram { color: #E1306C; }
+        .fa-linkedin { color: #0077b5; }
+        .fa-whatsapp { color: #25D366; }
 
         .text-group { display: flex; flex-direction: column; }
         .main-text { font-weight: 700; font-size: 0.95rem; }
         .sub-text { font-size: 0.75rem; color: #555; }
 
-        /* --- SEÇÃO DE IMAGENS --- */
+        /* --- PORTFOLIO --- */
         .portfolio-section { width: 100%; margin-top: 35px; }
         .section-title { color: white; font-size: 1rem; margin-bottom: 15px; font-weight: 600; text-align: left; }
         .image-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -160,9 +173,17 @@
                 <h2>Web Designer</h2>
                 
                 <div class="quick-actions">
-                    <a href="#" class="circle-btn"><i class="fa-solid fa-phone"></i></a>
-                    <a href="#" class="circle-btn"><i class="fa-solid fa-envelope"></i></a>
-                    <a href="#" class="circle-btn"><i class="fa-solid fa-share-nodes"></i></a>
+                    <a href="tel:+5588999991254" class="circle-btn">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                    
+                    <a href="mailto:raykne.dev@gmail.com" class="circle-btn">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                    
+                    <div onclick="shareProfile()" class="circle-btn">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </div>
                 </div>
             </div>
         </header>
@@ -203,7 +224,7 @@
                     <i class="fa-solid fa-chevron-right" style="color:#ccc"></i>
                 </a>
 
-                <a href="#" class="card-link">
+                <a href="https://wa.me/5588999991254?text=Quero%20pedir%20um%20or%C3%A7amento" target="_blank" class="card-link">
                     <div class="card-left">
                         <i class="fa-brands fa-whatsapp icon-box"></i>
                         <div class="text-group">
@@ -227,7 +248,29 @@
                 </div>
             </div>
 
-        </div> </div>
+        </div> 
+    </div>
+
+    <script>
+        async function shareProfile() {
+            // Tenta usar a API nativa de compartilhamento do celular
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Raykne Pereira - Web Designer',
+                        text: 'Confira meu portfólio e links de contato!',
+                        url: window.location.href
+                    });
+                } catch (err) {
+                    console.log('Erro ao compartilhar', err);
+                }
+            } else {
+                // Fallback para computadores que não suportam 'share'
+                alert('Link copiado para a área de transferência!');
+                navigator.clipboard.writeText(window.location.href);
+            }
+        }
+    </script>
 
 </body>
 </html>
